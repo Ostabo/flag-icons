@@ -1,14 +1,17 @@
 import os
 import json
 
-flags_dir = os.path.join("flags", "1x1")
+flags_dir = os.path.join("flags")
 
 files = []
 for (dirpath, dirnames, filenames) in os.walk(flags_dir):
     files.extend(filenames)
     break
 
-file_codes = [name.replace(".svg", "") for name in files]
+file_codes = [name
+              .replace(".svg", "")
+              .replace("1x1-", "")
+              .replace("4x3-", "") for name in files]
 
 country_json = open("country.json")
 flags = json.load(country_json)
